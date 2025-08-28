@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weather App — Separate Files</title>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+  <!-- local stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light">
+  <div class="app" role="application">
+    <div class="top-row">
+      <div style="display:flex;gap:8px;flex:1;align-items:center">
+        <div class="search" style="flex:1">
+          <input class="search-input" placeholder="Enter city name" />
+          <button class="icon-btn" id="searchBtn" title="Search">🔎</button>
+        </div>
+
+        <div class="lang-select">
+          <label for="lang">🌐</label>
+          <select id="lang">
+            <option value="en">English</option>
+            <option value="bn">বাংলা</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+
+        <button class="icon-btn voice-btn" id="voiceBtn" title="Voice">🎤</button>
+        <div style="margin-left:6px;font-size:13px;" id="voiceStatus">idle</div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn" id="toggleMode">🌙 Dark</button>
+      </div>
+    </div>
+
+    <div class="offline-banner" id="offlineBanner">You are offline — showing cached data if available.</div>
+
+    <div class="main-grid">
+      <!-- LEFT: main weather + forecast -->
+      <div class="left-card">
+        <div class="weather" id="weatherCard">
+          <div><img id="weatherIcon" class="weather-icon" alt="weather icon" src="" /></div>
+          <div class="temp" id="tempEl">--°C</div>
+          <div class="city" id="cityEl">--</div>
+
+          <div class="details">
+            <div class="col">
+              <div style="font-size:20px">💧</div>
+              <div><div class="small" id="humidityEl">--%</div><div class="small-muted">Humidity</div></div>
+            </div>
+            <div class="col">
+              <div style="font-size:20px">💨</div>
+              <div><div class="small" id="windEl">-- km/h</div><div class="small-muted">Wind</div></div>
+            </div>
+          </div>
+
+          <div class="extra-details">
+            <div class="extra-card"><div class="small-muted">Feels</div><div id="feelsEl" class="small">--°C</div></div>
+            <div class="extra-card"><div class="small-muted">Sunrise</div><div id="sunriseEl" class="small">--:--</div></div>
+            <div class="extra-card"><div class="small-muted">Sunset</div><div id="sunsetEl" class="small">--:--</div></div>
+            <div class="extra-card"><div class="small-muted">Pressure</div><div id="pressureEl" class="small">-- hPa</div></div>
+            <div class="extra-card"><div class="small-muted">Visibility</div><div id="visibilityEl" class="small">-- km</div></div>
+          </div>
+
+          <div class="controls">
+            <button class="unit-toggle" id="unitToggle">Switch to °F</button>
+            <button class="btn" id="saveDashboard">☆ Save to Dashboard</button>
+          </div>
+
+          <div class="aqi-block" id="aqiBlock" style="display:none">
+            <div style="display:flex;justify-content:center;gap:12px;align-items:center">
+              <div><strong>AQI</strong> <div id="aqiIndex">--</div></div>
+              <div id="aqiStatus">--</div>
+            </div>
+            <div id="aqiComponents" style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"></div>
+          </div>
+
+          <div class="alerts-block" id="alertsBlock" style="display:none"></div>
+        </div>
+
+        <div class="history-section">
+          <h4>🔍 Search History</h4>
+          <div class="history" id="history"></div>
+        </div>
+
+        <div class="forecast-section">
+          <h4>Hourly (next 24h)</h4>
+          <div class="chart-wrap"><canvas id="hourlyChart" height="120"></canvas></div>
+
+          <h4 style="margin-top:12px">5-Day Forecast</h4>
+          <div class="daily-forecast" id="dailyForecast"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: map, dashboard, assistant -->
+      <div class="right-card">
+        <div>
+          <h4>📌 My Dashboard</h4>
+          <div class="dashboard-list" id="dashboardList"></div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4>🌍 Map — click to get weather</h4>
+          <div id="map"></div>
+          <div class="small-muted">Tip: click anywhere on the map or use your location marker.</div>
+        </div>
+
+        <div class="assistant" style="margin-top:12px">
+          <h4 class="assistant-title">🤖 Weather Assistant</h4>
+          <textarea class="assistant-input" id="assistantInput" placeholder="Ask me about the weather..."></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="assistantBtn">Ask</button>
+            <button class="btn" id="speakSummary">🔈 Speak Summary</button>
+          </div>
+          <div id="assistantResponse" class="small-muted" style="margin-top:8px"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- main script -->
+  <script src="script.js"></script>
+</body>
+</html>

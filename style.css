@@ -1,0 +1,77 @@
+:root{--accent:#00c6ff;--accent-dark:#0072ff}
+*{box-sizing:border-box}
+body{font-family:"Poppins",sans-serif;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;transition:background .35s,color .35s}
+body.light{background:linear-gradient(135deg,#4facfe,#00f2fe);color:#111}
+body.dark{background:linear-gradient(135deg,#0f1724,#0b2540);color:#fff}
+
+.app{width:100%;max-width:1024px;background:rgba(255,255,255,0.95);border-radius:14px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.12);transition:background .35s}
+body.dark .app{background:rgba(12,20,34,0.85)}
+
+.top-row{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.search{display:flex;gap:8px;flex:1}
+.search input{flex:1;padding:10px 14px;border-radius:999px;border:0;outline:0;background:#f1f5f9}
+body.dark .search input{background:#253341;color:#fff}
+.btn{background:var(--accent);border:0;color:#fff;padding:10px;border-radius:10px;cursor:pointer}
+.icon-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent);border:0;cursor:pointer}
+.voice-btn{background:#6ee7b7}
+.lang-select{display:flex;align-items:center;gap:6px;padding-left:6px}
+.lang-select select{padding:6px;border-radius:8px;border:0;background:#f1f5f9}
+body.dark .lang-select select{background:#334155;color:#fff}
+
+.offline-banner{display:none;background:#ffe6a7;color:#333;padding:8px;border-radius:8px;margin-top:8px;text-align:center}
+
+.main-grid{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:12px}
+@media(max-width:980px){.main-grid{grid-template-columns:1fr}}
+.left-card{padding:12px}
+.right-card{padding:12px;border-left:1px solid rgba(0,0,0,0.04)}
+body.dark .right-card{border-left:1px solid rgba(255,255,255,0.04)}
+
+.weather{display:none;text-align:center}
+.weather-icon{width:110px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+.temp{font-size:48px;margin:8px 0}
+.city{font-size:20px;opacity:.95}
+
+.details{display:flex;justify-content:space-between;padding:8px 12px;margin-top:8px}
+.col{display:flex;gap:8px;align-items:center}
+.col img{width:36px}
+.small{font-weight:700}
+
+.extra-details{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:12px}
+.extra-card{background:rgba(255,255,255,0.9);padding:8px;border-radius:10px;text-align:center}
+body.dark .extra-card{background:rgba(30,41,59,0.85)}
+
+.controls{margin-top:10px;display:flex;gap:8px;align-items:center;justify-content:center}
+.unit-toggle{padding:8px 12px;border-radius:20px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+
+.history{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.history button{background:var(--accent);border:0;color:#fff;padding:6px 10px;border-radius:20px;cursor:pointer}
+
+.forecast-section{margin-top:14px}
+.daily-forecast{display:flex;gap:8px;overflow-x:auto;padding:8px 0}
+.daily-card{min-width:110px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.95);text-align:center}
+body.dark .daily-card{background:rgba(20,28,40,0.85)}
+
+.chart-wrap{margin-top:8px}
+
+.aqi-block{margin-top:10px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.95)}
+.alerts-block{margin-top:10px;padding:8px;border-radius:10px;background:rgba(255,240,240,0.95)}
+
+.dashboard-list{display:flex;gap:8px;overflow-x:auto;padding:8px 0}
+.dashboard-card{min-width:140px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.95);text-align:center}
+body.dark .dashboard-card{background:rgba(20,28,40,0.85)}
+
+.map-section{margin-top:12px}
+#map{height:260px;border-radius:8px;overflow:hidden}
+
+.assistant{margin-top:12px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.03)}
+.assistant textarea{width:100%;height:64px;padding:8px;border-radius:8px;border:1px solid #ccc}
+body.dark .assistant textarea{background:#22303a;color:#fff;border:0}
+
+.small-muted{font-size:13px;opacity:.8;margin-top:6px}
+
+@media(max-width:640px){
+  .top-row{flex-direction:column;align-items:stretch}
+  .main-grid{grid-template-columns:1fr}
+  #map{height:180px}
+}
